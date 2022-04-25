@@ -1,0 +1,13 @@
+name: 'Named links for Slack'
+description: 'replace all links in givent text with Slacks named link format'
+inputs:
+  in_text:
+    description: 'Input text'
+    required: true
+    default: ''
+outputs:
+  modified_text:
+    description: 'This output modified for named links'
+runs:
+  using: 'node16'
+  main: 'index.js'
