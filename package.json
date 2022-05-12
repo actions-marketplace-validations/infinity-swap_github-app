@@ -1,24 +1,35 @@
 {
-  "name": "namedlinkslack",
+  "name": "github-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "JavaScript Action Template",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint index.js",
+    "package": "ncc build index.js -o dist",
+    "test": "eslint index.js && jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ayazgv/NamedLinkSlack.git"
+    "url": "git+https://github.com/infinity-swap/github-app.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "JavaScript"
+  ],
+  "author": "ayazgv",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/ayazgv/NamedLinkSlack/issues"
+    "url": "https://github.com/infinity-swap/github-app/issues"
   },
-  "homepage": "https://github.com/ayazgv/NamedLinkSlack#readme",
+  "homepage": "https://github.com/infinity-swap/github-app#readme",
   "dependencies": {
-    "@actions/core": "^1.6.0",
-    "@actions/github": "^5.0.1"
+    "@actions/core": "^1.1.1",
+    "node-fetch": "^3.1.1"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.33.4",
+    "eslint": "^6.3.0",
+    "jest": "^24.9.0"
   }
 }

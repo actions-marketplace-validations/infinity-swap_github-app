@@ -1,8 +1,8 @@
-name: 'Named links for Slack'
-description: 'replace all links in givent text with Slacks named link format'
+name: 'Github App for Slack'
+description: 'Replace all links in given text with Slacks named link format'
 inputs:
-  in_text:
-    description: 'Input text'
+  json_from_github:
+    description: 'Json content from github'
     required: true
     default: ''
 outputs:

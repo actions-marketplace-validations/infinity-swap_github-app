@@ -1,1 +1,1 @@
-# NamedLinkSlack
+# Release Info for Slack
