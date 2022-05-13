@@ -10,7 +10,7 @@ outputs:
     description: 'This output modified for named links'
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: 'dist/index.js'
 branding:
   color: "orange"
   icon: "link-2"
