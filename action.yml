@@ -1,13 +1,15 @@
-name: 'Github App for Slack'
-description: 'Replace all links in given text with Slacks named link format'
+name: 'Release information for Slack'
+description: 'Specific github app for sending release info to the Slack webhook'
 inputs:
   json_from_github:
     description: 'Json content from github'
     required: true
     default: ''
-outputs:
-  modified_text:
-    description: 'This output modified for named links'
+  warn_message:
+    description: 'Additional Warning message'
+    required: false
+    default: ''
+
 runs:
   using: 'node16'
   main: 'dist/index.js'
