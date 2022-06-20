@@ -9,11 +9,13 @@ const short_link_view_slack = __nccwpck_require__(600);
 
 function createMessage() {
   let json_from_github = core.getInput("json_from_github", {});
-  json_from_github = JSON.parse(json_from_github);
-  let message = {}
-  message["blocks"] = [];
+  let warn_message = core.getInput("warn_message", {});
+  json_from_github = json_parse(json_from_github);
+  let message = {};
 
-  if (json_from_github !== undefined) {
+  if (!isEmpty(json_from_github)) {
+    message["blocks"] = [];
+
     if ("event" in json_from_github) {
       if ("release" in json_from_github.event) {
         message.blocks.push(
@@ -25,6 +27,18 @@ function createMessage() {
               }
             }
         )
+
+        if (warn_message !== "**" && warn_message !== '') {
+          message.blocks.push(
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": `*${ warn_message }*`
+              }
+            }
+          )
+        }
 
         message.blocks.push(
             {
@@ -95,6 +109,21 @@ function createMessage() {
   }
 
   return message;
+}
+
+
+function json_parse(json) {
+  try {
+    return JSON.parse(json);
+  }
+  catch(e) {
+    return {};
+  }
+}
+
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
 }
 
 module.exports = createMessage
