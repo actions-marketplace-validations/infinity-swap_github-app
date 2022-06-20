@@ -23,7 +23,7 @@ jobs:
     - name: post a message to slack
       uses: ./
       env:
-        INCOMING_WEBHOOK_URL: ${{ secrets.INCOMING_WEBHOOK_URL }}
+        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
         json_from_github: ${{ toJSON(github) }}
         warn_message: "[sample Warn message]"
