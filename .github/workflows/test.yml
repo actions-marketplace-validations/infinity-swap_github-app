@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: post a message to slack
-      uses: ./dist/
+      uses: ./
       env:
         INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
