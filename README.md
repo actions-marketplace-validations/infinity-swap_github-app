@@ -1,1 +1,2 @@
-# Release Info for Slack
+# Release Information for Slack
+

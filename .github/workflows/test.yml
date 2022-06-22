@@ -11,7 +11,7 @@ jobs:
   units:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: npm ci
     - run: npm test
 
@@ -19,35 +19,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: echo "${{ github.event.head_commit.message }}" | tr '\n' ' '
-    - name: get commit message
-      run: echo "COMMIT_MESSAGE=${{ github.event.head_commit.message }}" | tr '\n' ' ' >> $GITHUB_ENV
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
     - name: post a message to slack
       uses: ./
+      if: always()
       env:
-        INCOMING_WEBHOOK_URL: ${{ secrets.INCOMING_WEBHOOK_URL }}
+        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
-        text: slack-incoming-webhook sample
-        attachments: |
-          [
-            {
-              "color": "good",
-              "author_name": "${{ github.actor }}",
-              "author_icon": "${{ github.event.sender.avatar_url }}",
-              "fields": [
-                {
-                  "title": "Commit Message",
-                  "value": "${{ env.COMMIT_MESSAGE }}"
-                },
-                {
-                  "title": "GitHub Actions URL",
-                  "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                },
-                {
-                  "title": "Compare URL",
-                  "value": "${{ github.event.compare }}"
-                }
-              ]
-            }
-          ]
+        json_from_github: ${{ toJSON(github) }}
+        warn_message: "[sample Warn message]"
