@@ -19,27 +19,29 @@ function createMessage() {
     if ("event" in json_from_github) {
       if ("release" in json_from_github.event) {
         message.blocks.push(
-            {
-              "type": "header",
-              "text": {
-                "type": "plain_text",
-                "text": `${ json_from_github.event.release.name } is published!`
-              }
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": `${json_from_github.event.release.name} is published!`
             }
+          }
         )
+      }
 
-        if (warn_message !== "**" && warn_message !== '') {
-          message.blocks.push(
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": `*${ warn_message }*`
-              }
+      if (warn_message !== "**" && warn_message !== '') {
+        message.blocks.push(
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": `*${ warn_message }*`
             }
-          )
-        }
+          }
+        )
+      }
 
+      if ("release" in json_from_github.event) {
         message.blocks.push(
             {
               "type": "section",
