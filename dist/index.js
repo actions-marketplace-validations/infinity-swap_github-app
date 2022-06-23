@@ -10,8 +10,13 @@ const short_link_view_slack = __nccwpck_require__(600);
 function createMessage() {
   let json_from_github = core.getInput("json_from_github", {});
   let warn_message = core.getInput("warn_message", {});
+  let fallback_text = core.getInput("fallback_text", {});
   json_from_github = json_parse(json_from_github);
   let message = {};
+
+  if (fallback_text !== undefined && fallback_text !== '') {
+    message["text"] = fallback_text;
+  }
 
   if (!isEmpty(json_from_github)) {
     message["blocks"] = [];
@@ -41,7 +46,39 @@ function createMessage() {
         )
       }
 
+      if ("repository" in json_from_github.event) {
+        message.blocks.push(
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": `*Repository:* ${ json_from_github.event.repository.name }`
+            }
+          }
+        )
+      }
+
       if ("release" in json_from_github.event) {
+        message.blocks.push(
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": `*Tag:* ${ json_from_github.event.release.tag_name }`
+            }
+          }
+        );
+
+        message.blocks.push(
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": `*Author:* ${ json_from_github.actor }`
+            }
+          }
+        )
+
         message.blocks.push(
             {
               "type": "section",
@@ -73,41 +110,7 @@ function createMessage() {
             }
         )
       }
-
-      if ("repository" in json_from_github.event) {
-        message.blocks.push(
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": `*repository:* ${ json_from_github.event.repository.name }`
-              }
-            }
-        )
-      }
-
-      if ("release" in json_from_github.event) {
-        message.blocks.push(
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": `*repository:* ${ json_from_github.event.release.tag_name }`
-              }
-            }
-        )
-      }
     }
-
-    message.blocks.push(
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": `*Author:* ${ json_from_github.actor }`
-          }
-        }
-    )
   }
 
   return message;
