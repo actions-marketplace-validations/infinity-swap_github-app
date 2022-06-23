@@ -29,5 +29,6 @@ jobs:
       env:
         INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
+        fallback_text: "Fallback message displayed!"
         json_from_github: ${{ toJSON(github) }}
         warn_message: "[sample Warn message]"
