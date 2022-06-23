@@ -1,6 +1,10 @@
 name: 'Release information for Slack'
 description: 'Specific github app for sending release info to the Slack webhook'
 inputs:
+  fallback_text:
+    description: "The usage of this field changes depending on whether you`re using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback."
+    required: false
+    default: ''
   json_from_github:
     description: 'Json content from github'
     required: true
