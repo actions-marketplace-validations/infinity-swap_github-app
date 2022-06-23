@@ -55,6 +55,27 @@ const sample_warn_result = {
       "type": "section",
       "text": {
         "type": "mrkdwn",
+        "text": "*Repository:* sample-repo"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Tag:* tag16"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Author:* sample-user"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
         "text": "*Information:*"
       }
     },
@@ -74,27 +95,6 @@ const sample_warn_result = {
         "value": "click_me_123",
         "url": "https://github.com/sample-org/sample-repo/releases/tag/tag16",
         "action_id": "button-action"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*repository:* sample-repo"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*repository:* tag16"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*Author:* sample-user"
       }
     }
   ]
